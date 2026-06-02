@@ -4,6 +4,8 @@ const scissorsBtn = document.querySelector(".scissors");
 const score = document.querySelector(".score");
 const roundResult = document.querySelector(".roundResult");
 const gameDisplay = document.querySelector(".gameResult");
+const humanScoreDisplay = document.querySelector(".human-score");
+const computerScoreDisplay = document.querySelector(".computer-score");
 
 let humanScore = 0;
 let computerScore = 0;
@@ -49,6 +51,9 @@ scissorsBtn.addEventListener("click", () => {
 });
 
 function playRound(humanChoice, computerChoice) {
+  if (humanScore === 0 && computerScore === 0) {
+    gameDisplay.textContent = "";
+  }
   if (
     (humanChoice === "Rock" && computerChoice === "Paper") ||
     (humanChoice === "Paper" && computerChoice === "Scissors") ||
@@ -61,16 +66,18 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "Paper" && computerChoice === "Rock") ||
     (humanChoice === "Scissors" && computerChoice === "Paper")
   ) {
-    roundResult.textContent = `You won! ${humanChoice} beats ${computerChoice}`
+    roundResult.textContent = `You won! ${humanChoice} beats ${computerChoice}`;
     humanScore++;
   } else if (humanChoice === computerChoice) {
-    roundResult.textContent = `It's a tie!`
+    roundResult.textContent = `It's a tie!`;
   }
 }
 
 function displayScore() {
-  score.textContent = `
+  humanScoreDisplay.textContent = `
   Your Score: ${humanScore}
+  `;
+  computerScoreDisplay.textContent = `
   Computer Score: ${computerScore}
   `;
 }
@@ -85,7 +92,7 @@ function gameResult() {
     }
     humanScore = 0;
     computerScore = 0;
-    roundResult.textContent = ""
+    roundResult.textContent = "";
     displayScore();
   }
 }
